@@ -34,4 +34,26 @@ describe('tasks', () => {
             cy.isRequired('This is a required field')
         })
     })
+
+    context('update', ()=>{
+        it('Should be task finish', ()=>{
+            const task = {
+                name: 'Task automated - Pagar conta de consumo',
+                is_done: false
+            }
+                
+            cy.removeTaskByName(task.name)
+            cy.createNewTaskByAPI(task)
+            
+            cy.visit('http://localhost:3000/')
+
+            cy.contains('p', task.name)
+                .parent()
+                .find('button[class*=ItemToggle]')
+                .click()
+
+            cy.contains('p', task.name)
+                .should('have.css', 'text-decoration-line', 'line-through')
+        })
+    })
 })
