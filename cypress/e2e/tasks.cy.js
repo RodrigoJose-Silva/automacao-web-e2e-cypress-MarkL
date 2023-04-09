@@ -56,4 +56,24 @@ describe('tasks', () => {
                 .should('have.css', 'text-decoration-line', 'line-through')
         })
     })
+    
+    context('delete', ()=>{
+        it('Should remove task', ()=>{
+            const task = {
+                name: 'Task automated - Estudar Java',
+                is_done: false
+            }
+                
+            cy.removeTaskByName(task.name)
+            cy.createNewTaskByAPI(task)
+            
+            cy.visit('http://localhost:3000/')
+
+            cy.contains('p', task.name)
+                .parent()
+                .find('button[class*=ItemDelete]')
+                .click()
+                .should('not.exist')
+        })
+    })
 })
