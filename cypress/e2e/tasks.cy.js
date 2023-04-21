@@ -45,7 +45,7 @@ describe('tasks', () => {
             cy.removeTaskByName(task.name)
             cy.createNewTaskByAPI(task)
             
-            cy.visit('http://localhost:3000/')
+            cy.visit('/')
 
             cy.contains('p', task.name)
                 .parent()
@@ -67,7 +67,7 @@ describe('tasks', () => {
             cy.removeTaskByName(task.name)
             cy.createNewTaskByAPI(task)
             
-            cy.visit('http://localhost:3000/')
+            cy.visit('/')
 
             cy.contains('p', task.name)
                 .parent()
