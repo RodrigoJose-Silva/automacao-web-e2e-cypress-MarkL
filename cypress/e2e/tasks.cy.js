@@ -1,10 +1,19 @@
 ///<reference types="cypress" />
 
 describe('tasks', () => {
+
+    let testData;
+
+    before(()=>{
+        cy.fixture('task').then(t =>{
+            testData= t
+        })
+    })
+
     context('register', () => {
         it('Should be register a new task', () => {
 
-            const taskName = 'Ler um livro de node.js'
+            const taskName = 'Task automated - Ler um livro de node.js'
 
             cy.removeTaskByName(taskName)
             cy.createTask(taskName)
@@ -15,10 +24,7 @@ describe('tasks', () => {
 
         it('Should not allow dulpicated task', () => {
 
-            const task = {
-                name: 'Task automated - Ler um livro de JavaScript',
-                is_done: false
-            }
+            const task = testData.dup
 
             cy.removeTaskByName(task.name)
             cy.createNewTaskByAPI(task)
